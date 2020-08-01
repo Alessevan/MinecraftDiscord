@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'fr.il_totore.manadrop' version '0.4.1-SNAPSHOT'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+import fr.il_totore.manadrop.MinecraftDependencyHelper
+import fr.il_totore.manadrop.MinecraftRepositoryHelper
+
+group 'fr.bakaaless'
+version '1.0-SNAPSHOT'
+
+libsDirName = "E:/1.15.2/Paper/plugins"
+
+def mainVersion = '1.15'
+def releaseVersion = '.2'
+
+repositories {
+    MinecraftRepositoryHelper.spigotSnapshot()
+    MinecraftRepositoryHelper.sonatype()
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compileOnly group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+    compileOnly MinecraftDependencyHelper.spigotApi(mainVersion + releaseVersion)
+    compileOnly MinecraftDependencyHelper.spigot(mainVersion + releaseVersion)
+    compile group: 'net.dv8tion', name: 'JDA', version: '4.2.0_183'
+}
+
+shadowJar {
+    dependencies {
+        exclude(dependency('org.spigotmc:spigot-api:.*'))
+        exclude(dependency('net.md-5:bungeecord-api:.*'))
+    }
+}
+
+spigot {
+    desc {
+        authors 'Aless#6161'
+        main 'fr.bakaaless.InterMonde.plugin.InterMonde'
+        apiVersion mainVersion
+        command {
+            named 'intermonde'
+            description 'InterMonde command'
+        }
+    }
+}
+
+buildTools {
+    versions mainVersion
+}
+
+processResources.finalizedBy(spigotPlugin)
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
