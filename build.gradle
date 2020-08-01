@@ -11,8 +11,6 @@ import fr.il_totore.manadrop.MinecraftRepositoryHelper
 group 'fr.bakaaless'
 version '1.0-SNAPSHOT'
 
-libsDirName = "E:/1.15.2/Paper/plugins"
-
 def mainVersion = '1.15'
 def releaseVersion = '.2'
 
