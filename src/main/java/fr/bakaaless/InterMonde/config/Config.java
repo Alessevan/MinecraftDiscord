@@ -1,7 +1,6 @@
 package fr.bakaaless.InterMonde.config;
 
 import fr.bakaaless.InterMonde.plugin.InterMonde;
-import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -9,25 +8,16 @@ import java.util.logging.Level;
 
 public class Config {
 
-    private static String path = InterMonde.getInstance().getDataFolder().getAbsolutePath();
+    private static final String path = InterMonde.getInstance().getDataFolder().getAbsolutePath();
 
-    @Getter
     private static String token = "";
-    @Getter
     private static String serverId = "";
-    @Getter
     private static String channelId = "";
-    @Getter
     private static String formatDiscordChat = "{0} » {1}";
-    @Getter
     private static String formatDiscordJoin = "{0} a rejoint le serveur.";
-    @Getter
     private static String formatDiscordQuit = "{0} a quitté le serveur.";
-    @Getter
     private static String formatDiscordStart = "Serveur ouvert.";
-    @Getter
     private static String formatDiscordStop = "Serveur fermé.";
-    @Getter
     private static String formatMinecraft = "&3{0} &8» &7{1}";
 
     public static void init() {
@@ -71,5 +61,45 @@ public class Config {
                 InterMonde.getInstance().getLogger().log(Level.SEVERE, "Can't load file configuration.", e);
             }
         }
+    }
+
+    public static String getPath() {
+        return path;
+    }
+
+    public static String getToken() {
+        return token;
+    }
+
+    public static String getServerId() {
+        return serverId;
+    }
+
+    public static String getChannelId() {
+        return channelId;
+    }
+
+    public static String getFormatDiscordChat() {
+        return formatDiscordChat;
+    }
+
+    public static String getFormatDiscordJoin() {
+        return formatDiscordJoin;
+    }
+
+    public static String getFormatDiscordQuit() {
+        return formatDiscordQuit;
+    }
+
+    public static String getFormatDiscordStart() {
+        return formatDiscordStart;
+    }
+
+    public static String getFormatDiscordStop() {
+        return formatDiscordStop;
+    }
+
+    public static String getFormatMinecraft() {
+        return formatMinecraft;
     }
 }

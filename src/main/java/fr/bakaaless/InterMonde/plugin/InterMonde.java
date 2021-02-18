@@ -7,7 +7,6 @@ import fr.bakaaless.InterMonde.listeners.DiscordListener;
 import fr.bakaaless.InterMonde.listeners.MinecraftListener;
 import fr.bakaaless.InterMonde.mysql.DBConnection;
 import fr.bakaaless.InterMonde.permissions.Permissions;
-import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -26,10 +25,8 @@ import java.util.UUID;
 
 public class InterMonde extends JavaPlugin {
 
-    @Getter
     private static InterMonde instance;
 
-    @Getter
     private JDA jda;
 
     public static String getUUIDFromDiscordId(final Member member) {
@@ -121,5 +118,13 @@ public class InterMonde extends JavaPlugin {
             MinecraftListener.sendDiscord(Config.getFormatDiscordStop());
             this.jda.shutdownNow();
         }
+    }
+
+    public static InterMonde getInstance() {
+        return instance;
+    }
+
+    public JDA getJda() {
+        return this.jda;
     }
 }

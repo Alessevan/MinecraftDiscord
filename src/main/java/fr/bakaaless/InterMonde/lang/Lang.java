@@ -1,8 +1,6 @@
 package fr.bakaaless.InterMonde.lang;
 
 import fr.bakaaless.InterMonde.plugin.InterMonde;
-import lombok.AccessLevel;
-import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -29,13 +27,11 @@ public enum Lang {
     ERROR_LINKED("error.linked", "%prefix_error% &cVous n'êtes pas relié à un compte discord."),
     ERROR_CONSOLE("error.console", "%prefix_error% &cSeul un joueur peut exécuter cette commande."),
     ERROR_LINK("error.link.code", "%prefix_error% &cVous vous êtes trompé de code. Séquence de synchronisation annulée."),
-    ERROR_MESSAGE("error.link.message", "%prefix_error% &cImpossible d'envoyer un message privé à ce discord"),
+    ERROR_MESSAGE("error.link.message", "%prefix_error% &cImpossible d'envoyer un message privé à ce compte discord."),
     ERROR_MINECRAFT_LINK("error.link.minecraft", "%prefix_error% &cVotre compte minecraft est déjà lié."),
     ERROR_DISCORD_LINK("error.link.discord", "%prefix_error% &cCe compte discord est déjà lié.");
 
-    @Getter(AccessLevel.PRIVATE)
     private final String path;
-    @Getter(AccessLevel.PRIVATE)
     private String message;
 
     Lang(final String path, final String message) {
@@ -53,8 +49,8 @@ public enum Lang {
 
     public String get(final String... replacement) {
         String message = this.message
-                .replace("%prefix_info%", PREFIX_INFO.getMessage())
-                .replace("%prefix_error%", PREFIX_ERROR.getMessage());
+                .replace("%prefix_info%", PREFIX_INFO.message)
+                .replace("%prefix_error%", PREFIX_ERROR.message);
         for (int i = 0; i < replacement.length; i++) {
             if (replacement[i].equals("")) continue;
             message = message.replace("{" + i + "}", replacement[i]);
@@ -75,7 +71,7 @@ public enum Lang {
                 final YamlConfiguration yamlConfiguration = new YamlConfiguration();
                 yamlConfiguration.load(file);
                 for (final Lang lang : values()) {
-                    yamlConfiguration.set(lang.getPath(), lang.getMessage());
+                    yamlConfiguration.set(lang.path, lang.message);
                 }
                 yamlConfiguration.save(file);
             } catch (IOException | InvalidConfigurationException e) {
@@ -86,10 +82,10 @@ public enum Lang {
                 final YamlConfiguration yamlConfiguration = new YamlConfiguration();
                 yamlConfiguration.load(file);
                 for (final Lang lang : values()) {
-                    if (yamlConfiguration.get(lang.getPath()) == null)
-                        yamlConfiguration.set(lang.getPath(), lang.getMessage());
+                    if (yamlConfiguration.get(lang.path) == null)
+                        yamlConfiguration.set(lang.path, lang.message);
                     else
-                        lang.setMessage(yamlConfiguration.getString(lang.getPath()));
+                        lang.setMessage(yamlConfiguration.getString(lang.path));
                 }
                 yamlConfiguration.save(file);
             } catch (IOException | InvalidConfigurationException e) {

@@ -1,23 +1,16 @@
 package fr.bakaaless.InterMonde.mysql;
 
-import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
 public class DataBaseFile {
 
-    @Getter
     private static String engine = "sqlite";
-    @Getter
     private static String host = "localhost";
-    @Getter
     private static String user = "user";
-    @Getter
     private static String password = "p@ssworD";
-    @Getter
     private static String database = "database";
-    @Getter
     private static int port = 3306;
 
     public static void init(final String path) {
@@ -52,5 +45,29 @@ public class DataBaseFile {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static String getEngine() {
+        return engine;
+    }
+
+    public static String getHost() {
+        return host;
+    }
+
+    public static String getUser() {
+        return user;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static String getDatabase() {
+        return database;
+    }
+
+    public static int getPort() {
+        return port;
     }
 }

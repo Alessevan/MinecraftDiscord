@@ -1,7 +1,6 @@
 package fr.bakaaless.InterMonde.mysql;
 
 import fr.bakaaless.InterMonde.plugin.InterMonde;
-import org.apache.logging.log4j.core.Core;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.*;

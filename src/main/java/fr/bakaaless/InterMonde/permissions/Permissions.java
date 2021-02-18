@@ -1,8 +1,6 @@
 package fr.bakaaless.InterMonde.permissions;
 
 import fr.bakaaless.InterMonde.plugin.InterMonde;
-import lombok.AccessLevel;
-import lombok.Getter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,17 +12,15 @@ public enum Permissions {
 
     NONE("", false),
     ADMIN("admin", "intermonde.admin", true),
+    HELP("help", "intermonde.help", true),
     SYNCHRONISATION("synchronisation", "intermonde.synchronisation", true),
     HIDE("hide", "intermonde.hide", true),
     SHOW("show", "intermonde.show", true),
     EXPORT("export", "intermonde.export", true),
     IMPORT("import", "intermonde.import", true);
 
-    @Getter(AccessLevel.PRIVATE)
     private final String path;
-    @Getter(AccessLevel.PRIVATE)
     private String permission;
-    @Getter(AccessLevel.PRIVATE)
     private boolean updated;
 
     Permissions(final String permission, final boolean updated) {
@@ -75,7 +71,7 @@ public enum Permissions {
                 yamlConfiguration.load(file);
                 for (final Permissions permission : values()) {
                     if (!permission.updated) continue;
-                    yamlConfiguration.set(permission.getPath(), permission.getPermission());
+                    yamlConfiguration.set(permission.path, permission.permission);
                 }
                 yamlConfiguration.save(file);
             } catch (IOException | InvalidConfigurationException e) {
@@ -87,10 +83,10 @@ public enum Permissions {
                 yamlConfiguration.load(file);
                 for (final Permissions permission : values()) {
                     if (!permission.updated) continue;
-                    if (yamlConfiguration.get(permission.getPath()) == null)
-                        yamlConfiguration.set(permission.getPath(), permission.getPermission());
+                    if (yamlConfiguration.get(permission.path) == null)
+                        yamlConfiguration.set(permission.path, permission.permission);
                     else
-                        permission.setPermission(yamlConfiguration.getString(permission.getPath()));
+                        permission.setPermission(yamlConfiguration.getString(permission.path));
                 }
                 yamlConfiguration.save(file);
             } catch (IOException | InvalidConfigurationException e) {

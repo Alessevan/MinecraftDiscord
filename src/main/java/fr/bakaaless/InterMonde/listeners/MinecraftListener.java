@@ -58,8 +58,9 @@ public class MinecraftListener implements Listener {
                     else
                         name = InterMonde.getInstance().getJda().getGuildById(Config.getServerId()).getMemberById(id).getEffectiveName() + " (" + Bukkit.getOfflinePlayer(uuid).getName() + ")";
                 }
-            if (name == null | name.equals(""))
+            if (name == null || name.equals(""))
                 name = InterMonde.getInstance().getServer().getOfflinePlayer(uuid).getName();
+            assert name != null;
             sendDiscord(message.replace("{0}", name));
         }).start();
     }

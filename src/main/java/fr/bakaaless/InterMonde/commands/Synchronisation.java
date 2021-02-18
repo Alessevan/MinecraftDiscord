@@ -7,10 +7,8 @@ import fr.bakaaless.InterMonde.lang.Lang;
 import fr.bakaaless.InterMonde.mysql.DBConnection;
 import fr.bakaaless.InterMonde.permissions.Permissions;
 import fr.bakaaless.InterMonde.plugin.InterMonde;
-import lombok.Getter;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.PrivateChannel;
-import net.dv8tion.jda.api.entities.User;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -19,9 +17,7 @@ import java.util.*;
 
 public class Synchronisation implements ICommand {
 
-    @Getter
     private static Map<UUID, String> synchronisation;
-    @Getter
     private static Map<UUID, Member> user;
 
     public Synchronisation() {
@@ -66,14 +62,13 @@ public class Synchronisation implements ICommand {
                 return false;
             }
             new Thread(() -> {
+                if (!args.get(0).contains("#")) {
+                    player.sendMessage(Lang.ERROR_MESSAGE.get());
+                    return;
+                }
                 final String name = args.get(0).split("#")[0];
                 final String disciminator = args.get(0).split("#")[1];
-                System.err.println(name);
-                System.err.println(disciminator);
-                System.err.println(Config.getServerId());
-                System.err.println();
                 final Member member = InterMonde.getInstance().getJda().getGuildById(Config.getServerId()).getMemberByTag(name, disciminator);
-                System.err.println(member);
                 if (member != null) {
                     if (!InterMonde.getUUIDFromDiscordId(member.getId()).equals("")) {
                         player.sendMessage(Lang.ERROR_DISCORD_LINK.get());
@@ -111,5 +106,13 @@ public class Synchronisation implements ICommand {
             stringBuilder.append("-");
         }
         return stringBuilder.toString();
+    }
+
+    public static Map<UUID, String> getSynchronisation() {
+        return synchronisation;
+    }
+
+    public static Map<UUID, Member> getUser() {
+        return user;
     }
 }
