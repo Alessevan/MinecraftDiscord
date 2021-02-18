@@ -4,7 +4,6 @@ import fr.bakaaless.InterMonde.api.CommandAnnotation;
 import fr.bakaaless.InterMonde.api.ICommand;
 import fr.bakaaless.InterMonde.lang.Lang;
 import fr.bakaaless.InterMonde.plugin.InterMonde;
-import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,11 +16,11 @@ import java.util.Objects;
 
 public class CommandManager implements CommandExecutor {
 
-    @Getter()
     private static List<ICommand> commands;
 
     public CommandManager() {
         commands = new ArrayList<>();
+        commands.add(new Help());
         commands.add(new Export());
         commands.add(new Hide());
         commands.add(new Import());
@@ -76,4 +75,7 @@ public class CommandManager implements CommandExecutor {
         return false;
     }
 
+    public static List<ICommand> getCommands() {
+        return commands;
+    }
 }

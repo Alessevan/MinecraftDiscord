@@ -9,10 +9,10 @@ import fr.il_totore.manadrop.MinecraftDependencyHelper
 import fr.il_totore.manadrop.MinecraftRepositoryHelper
 
 group 'fr.bakaaless'
-version '1.0-SNAPSHOT'
+version '1.0.1-SNAPSHOT'
 
-def mainVersion = '1.15'
-def releaseVersion = '.2'
+def mainVersion = '1.16'
+def releaseVersion = '.5'
 
 repositories {
     MinecraftRepositoryHelper.spigotSnapshot()
@@ -24,10 +24,7 @@ repositories {
 
 dependencies {
     compileOnly group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
-    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
     compileOnly MinecraftDependencyHelper.spigotApi(mainVersion + releaseVersion)
-    compileOnly MinecraftDependencyHelper.spigot(mainVersion + releaseVersion)
     compile group: 'net.dv8tion', name: 'JDA', version: '4.2.0_183'
 }
 
